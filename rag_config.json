@@ -1,0 +1,24 @@
+{
+    "retrievers": {
+      "sqlite": {
+        "type": "sqlite",
+        "db_path": "/home/yjy/ARIN7102/project/promptcopy.db",
+        "query_template": "SELECT content FROM your_table WHERE your_conditions LIKE :condition",
+        "return_template": "{{content}}"
+      }
+    },
+    "generators": {
+      "chatGLM3": {
+        "type": "huggingface_transformers",
+        "model_name": "/home/yjy/ARIN7102/project/ChatGLM3",
+        "tokenizer_name": "/home/yjy/ARIN7102/project/ChatGLM3"
+      }
+    },
+    "rag": {
+      "generator_name": "chatGLM3",
+      "retriever_name": "sqlite",
+      "pre_concatenation_template": "{{retrieved_content}}\n\n###\n\n{{prompt}}",
+      "post_concatenation_template": "{{generation}}"
+    }
+  }
+  
